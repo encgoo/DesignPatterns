@@ -1,0 +1,18 @@
+all: test_cov
+
+CFLAGS = -fprofile-arcs -ftest-coverage
+
+membuf.o: ../membuf.cpp
+	g++ $(CFLAGS) -o membuf.o -c ../membuf.cpp
+
+membuf.a: membuf.o
+	ar rcs membuf.a membuf.o
+
+main.o: main.cpp
+	g++ -o main.o -I ../ -c main.cpp
+
+test_cov: membuf.a main.o
+	g++ --coverage -o test main.o membuf.a
+
+clean:
+	rm -f main.o membuf.o membuf.a *.gcov *.gcno *.gcda test
