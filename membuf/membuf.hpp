@@ -36,6 +36,9 @@ public:
     // Replace all occurences of a substring to another
     membuf& replace(const std::string& from_str, const std::string& to_str);
     
+    // Save a state
+    bool save();
+    
     // Undo
     membuf& undo();
     
