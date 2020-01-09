@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <regex>
 
 
 using namespace std;
@@ -84,6 +85,8 @@ void undo(string from_str, string to_str)
                              cur_index) != replace_lst.end();
         if (!b_inlist)
         {
+            //https://stackoverflow.com/questions/4643512/replace-substring-with-another-substring-c
+            // The above find/replace won't work if from_str.size() != to_str.size()
             buf.erase(itr, itr + to_str.size());
             buf.insert(itr, from_str.begin(), from_str.end());
             search_start = itr + from_str.size();
@@ -107,8 +110,11 @@ int main(int argc, const char * argv[]) {
     
     replace(" a ", " to ");
     
+    string rep_str = regex_replace(in_str, regex(" a "), " to ");
+    
     string replaced;
     copy(buf.begin(), buf.end(), back_inserter(replaced));
+    assert(rep_str.compare(replaced) == 0);
     
     undo(" a ", " to ");
     
