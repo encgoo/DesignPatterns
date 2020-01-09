@@ -123,5 +123,18 @@ int main(int argc, const char * argv[]) {
     
     assert(in_str.compare(content) == 0);
     
+    
+    replace_lst.clear();
+    replace("te", "test");
+    rep_str = regex_replace(in_str, regex("te"), "test");
+    replaced = "";
+    copy(buf.begin(), buf.end(), back_inserter(replaced));
+    assert(rep_str.compare(replaced) == 0);
+    
+    undo("te", "test");
+    content = "";
+    copy(buf.begin(), buf.end(), back_inserter(content));
+    assert(in_str.compare(content) == 0);
+    
     return 0;
 }
