@@ -13,8 +13,13 @@
 		B438AE7223C41B5E00BB2529 /* libmembuf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B438AE5B23C4149C00BB2529 /* libmembuf.a */; };
 		B438AE7523C6CBEC00BB2529 /* StateController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B438AE7323C6CBEC00BB2529 /* StateController.cpp */; };
 		B438AE7623C6CBEC00BB2529 /* StateController.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B438AE7423C6CBEC00BB2529 /* StateController.hpp */; };
-		B438AE7923C6D1C500BB2529 /* Memento.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B438AE7723C6D1C500BB2529 /* Memento.cpp */; };
 		B438AE7A23C6D1C500BB2529 /* Memento.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B438AE7823C6D1C500BB2529 /* Memento.hpp */; };
+		B438AE7E23C8B5EF00BB2529 /* Command.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B438AE7C23C8B5EF00BB2529 /* Command.hpp */; };
+		B438AE8123C8B74400BB2529 /* BufferCommands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B438AE7F23C8B74400BB2529 /* BufferCommands.cpp */; };
+		B438AE8223C8B74400BB2529 /* BufferCommands.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B438AE8023C8B74400BB2529 /* BufferCommands.hpp */; };
+		B4D6900D23C8C81A001F9CA7 /* CommandCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4D6900B23C8C81A001F9CA7 /* CommandCommon.cpp */; };
+		B4D6900E23C8C81A001F9CA7 /* CommandCommon.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B4D6900C23C8C81A001F9CA7 /* CommandCommon.hpp */; };
+		B4D6901023C8DDAC001F9CA7 /* Memento.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4D6900F23C8DDAC001F9CA7 /* Memento.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,8 +42,13 @@
 		B438AE6C23C41A3500BB2529 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		B438AE7323C6CBEC00BB2529 /* StateController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateController.cpp; sourceTree = "<group>"; };
 		B438AE7423C6CBEC00BB2529 /* StateController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateController.hpp; sourceTree = "<group>"; };
-		B438AE7723C6D1C500BB2529 /* Memento.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Memento.cpp; sourceTree = "<group>"; };
 		B438AE7823C6D1C500BB2529 /* Memento.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Memento.hpp; sourceTree = "<group>"; };
+		B438AE7C23C8B5EF00BB2529 /* Command.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Command.hpp; sourceTree = "<group>"; };
+		B438AE7F23C8B74400BB2529 /* BufferCommands.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BufferCommands.cpp; sourceTree = "<group>"; };
+		B438AE8023C8B74400BB2529 /* BufferCommands.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferCommands.hpp; sourceTree = "<group>"; };
+		B4D6900B23C8C81A001F9CA7 /* CommandCommon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CommandCommon.cpp; sourceTree = "<group>"; };
+		B4D6900C23C8C81A001F9CA7 /* CommandCommon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CommandCommon.hpp; sourceTree = "<group>"; };
+		B4D6900F23C8DDAC001F9CA7 /* Memento.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Memento.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +73,13 @@
 		B438AE5223C4149C00BB2529 = {
 			isa = PBXGroup;
 			children = (
-				B438AE7723C6D1C500BB2529 /* Memento.cpp */,
+				B4D6900B23C8C81A001F9CA7 /* CommandCommon.cpp */,
+				B4D6900C23C8C81A001F9CA7 /* CommandCommon.hpp */,
+				B438AE7C23C8B5EF00BB2529 /* Command.hpp */,
+				B4D6900F23C8DDAC001F9CA7 /* Memento.cpp */,
 				B438AE7823C6D1C500BB2529 /* Memento.hpp */,
+				B438AE7F23C8B74400BB2529 /* BufferCommands.cpp */,
+				B438AE8023C8B74400BB2529 /* BufferCommands.hpp */,
 				B438AE7323C6CBEC00BB2529 /* StateController.cpp */,
 				B438AE7423C6CBEC00BB2529 /* StateController.hpp */,
 				B438AE6B23C41A3500BB2529 /* test */,
@@ -106,7 +121,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B438AE8223C8B74400BB2529 /* BufferCommands.hpp in Headers */,
+				B438AE7E23C8B5EF00BB2529 /* Command.hpp in Headers */,
 				B438AE7623C6CBEC00BB2529 /* StateController.hpp in Headers */,
+				B4D6900E23C8C81A001F9CA7 /* CommandCommon.hpp in Headers */,
 				B438AE7A23C6D1C500BB2529 /* Memento.hpp in Headers */,
 				B438AE6523C4152700BB2529 /* membuf.hpp in Headers */,
 			);
@@ -189,8 +207,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B438AE8123C8B74400BB2529 /* BufferCommands.cpp in Sources */,
 				B438AE6423C4152700BB2529 /* membuf.cpp in Sources */,
-				B438AE7923C6D1C500BB2529 /* Memento.cpp in Sources */,
+				B4D6900D23C8C81A001F9CA7 /* CommandCommon.cpp in Sources */,
+				B4D6901023C8DDAC001F9CA7 /* Memento.cpp in Sources */,
 				B438AE7523C6CBEC00BB2529 /* StateController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

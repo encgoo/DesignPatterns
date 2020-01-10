@@ -7,6 +7,7 @@
 //
 
 #include "StateController.hpp"
+#include "Memento.hpp"
 
 using namespace std;
 
@@ -39,6 +40,7 @@ void StateController::storeMemento(Memento *pMemento)
             Memento *pMem = m_listMemento.back();
             m_listMemento.pop_back();
             delete pMem;
+            tmp --;
         }
     }
     m_listMemento.push_back(pMemento);
