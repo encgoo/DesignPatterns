@@ -12,11 +12,22 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
-
+#include "StateController.hpp"
 class membuf
 {
+public:
+    enum OPERATION
+    {
+        INSERT = 0,
+        APPEND,
+        ERASE,
+        ERASE_TRAILING,
+        REPLACE
+    };
 private:
-    std::vector<unsigned char> m_buf;
+    std::vector<unsigned char>  m_buf;
+    StateController             m_stateController;
+    
 public:
     membuf(std::string inbuf);
     virtual ~membuf(){};
@@ -28,16 +39,13 @@ public:
     membuf& append(const std::string& in_str);
     
     // Erase n characters at a given position
-    membuf& erase(size_t pos = 0, size_t len = std::string::npos);
+    membuf& erase(size_t pos, size_t len);
     
     // Erase n trailing characters
     membuf& erase_trailing(size_t len);
     
     // Replace all occurences of a substring to another
     membuf& replace(const std::string& from_str, const std::string& to_str);
-    
-    // Save a state
-    bool save();
     
     // Undo
     membuf& undo();

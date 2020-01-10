@@ -6,8 +6,39 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B438AE6423C4152700BB2529 /* membuf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B438AE6223C4152700BB2529 /* membuf.cpp */; };
+		B438AE6523C4152700BB2529 /* membuf.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B438AE6323C4152700BB2529 /* membuf.hpp */; };
+		B438AE6D23C41A3500BB2529 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B438AE6C23C41A3500BB2529 /* main.cpp */; };
+		B438AE7223C41B5E00BB2529 /* libmembuf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B438AE5B23C4149C00BB2529 /* libmembuf.a */; };
+		B438AE7523C6CBEC00BB2529 /* StateController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B438AE7323C6CBEC00BB2529 /* StateController.cpp */; };
+		B438AE7623C6CBEC00BB2529 /* StateController.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B438AE7423C6CBEC00BB2529 /* StateController.hpp */; };
+		B438AE7923C6D1C500BB2529 /* Memento.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B438AE7723C6D1C500BB2529 /* Memento.cpp */; };
+		B438AE7A23C6D1C500BB2529 /* Memento.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B438AE7823C6D1C500BB2529 /* Memento.hpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B438AE6823C41A3500BB2529 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B438AE5B23C4149C00BB2529 /* libmembuf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmembuf.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B438AE6223C4152700BB2529 /* membuf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = membuf.cpp; sourceTree = "<group>"; };
+		B438AE6323C4152700BB2529 /* membuf.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = membuf.hpp; sourceTree = "<group>"; };
+		B438AE6A23C41A3500BB2529 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		B438AE6C23C41A3500BB2529 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B438AE7323C6CBEC00BB2529 /* StateController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateController.cpp; sourceTree = "<group>"; };
+		B438AE7423C6CBEC00BB2529 /* StateController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StateController.hpp; sourceTree = "<group>"; };
+		B438AE7723C6D1C500BB2529 /* Memento.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Memento.cpp; sourceTree = "<group>"; };
+		B438AE7823C6D1C500BB2529 /* Memento.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Memento.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -18,13 +49,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B438AE6723C41A3500BB2529 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B438AE7223C41B5E00BB2529 /* libmembuf.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B438AE5223C4149C00BB2529 = {
 			isa = PBXGroup;
 			children = (
+				B438AE7723C6D1C500BB2529 /* Memento.cpp */,
+				B438AE7823C6D1C500BB2529 /* Memento.hpp */,
+				B438AE7323C6CBEC00BB2529 /* StateController.cpp */,
+				B438AE7423C6CBEC00BB2529 /* StateController.hpp */,
+				B438AE6B23C41A3500BB2529 /* test */,
 				B438AE5C23C4149C00BB2529 /* Products */,
+				B438AE6223C4152700BB2529 /* membuf.cpp */,
+				B438AE6323C4152700BB2529 /* membuf.hpp */,
+				B438AE7123C41B5E00BB2529 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -32,8 +79,24 @@
 			isa = PBXGroup;
 			children = (
 				B438AE5B23C4149C00BB2529 /* libmembuf.a */,
+				B438AE6A23C41A3500BB2529 /* test */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B438AE6B23C41A3500BB2529 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				B438AE6C23C41A3500BB2529 /* main.cpp */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		B438AE7123C41B5E00BB2529 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -43,6 +106,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B438AE7623C6CBEC00BB2529 /* StateController.hpp in Headers */,
+				B438AE7A23C6D1C500BB2529 /* Memento.hpp in Headers */,
+				B438AE6523C4152700BB2529 /* membuf.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +132,23 @@
 			productReference = B438AE5B23C4149C00BB2529 /* libmembuf.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		B438AE6923C41A3500BB2529 /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B438AE6E23C41A3500BB2529 /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				B438AE6623C41A3500BB2529 /* Sources */,
+				B438AE6723C41A3500BB2529 /* Frameworks */,
+				B438AE6823C41A3500BB2529 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test;
+			productName = test;
+			productReference = B438AE6A23C41A3500BB2529 /* test */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -76,6 +159,9 @@
 				ORGANIZATIONNAME = "Yongjian Feng";
 				TargetAttributes = {
 					B438AE5A23C4149C00BB2529 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					B438AE6923C41A3500BB2529 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 				};
@@ -93,6 +179,7 @@
 			projectRoot = "";
 			targets = (
 				B438AE5A23C4149C00BB2529 /* membuf */,
+				B438AE6923C41A3500BB2529 /* test */,
 			);
 		};
 /* End PBXProject section */
@@ -102,6 +189,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B438AE6423C4152700BB2529 /* membuf.cpp in Sources */,
+				B438AE7923C6D1C500BB2529 /* Memento.cpp in Sources */,
+				B438AE7523C6CBEC00BB2529 /* StateController.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B438AE6623C41A3500BB2529 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B438AE6D23C41A3500BB2529 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +337,22 @@
 			};
 			name = Release;
 		};
+		B438AE6F23C41A3500BB2529 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B438AE7023C41A3500BB2529 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -256,6 +370,15 @@
 			buildConfigurations = (
 				B438AE6023C4149C00BB2529 /* Debug */,
 				B438AE6123C4149C00BB2529 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B438AE6E23C41A3500BB2529 /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B438AE6F23C41A3500BB2529 /* Debug */,
+				B438AE7023C41A3500BB2529 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

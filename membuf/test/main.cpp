@@ -23,12 +23,26 @@ int main(int argc, const char * argv[]) {
     
     membuf in_buf("");
     size_t sz_read = in_buf.read_file(filename);
+    
+    // Make sure we can read the file we just wrote
     assert(sz_read == init_str.size());
     
     string read_content = in_buf.get_content();
     
+    // Verify the content we read
     assert(read_content.compare(init_str) == 0);
     
+    // Test insert
+    text_buf.insert(5, " Hello");
     
+    // Test replace
+    text_buf.replace("Hello", "hello");
+    
+    read_content = text_buf.get_content();
+    
+    // Special test
+    text_buf.replace("hello", "hello");
+    
+    assert(read_content.compare("hello hello world!") == 0);
     return 0;
 }
