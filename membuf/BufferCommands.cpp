@@ -166,6 +166,8 @@ bool ReplaceCommand::Execute(membuf::CharBuf *pBuf)
         
         next_from = search(search_start, pBuf->end(), m_fromStr.begin(), m_fromStr.end());
     }
+    store_toString_pos(search_start, pBuf->end(), m_toStr, cur_index);
+    
     return true;
 }
 
