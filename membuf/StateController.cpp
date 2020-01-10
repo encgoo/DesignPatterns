@@ -60,12 +60,16 @@ Memento *StateController::getPrevious()
 
 Memento *StateController::getNext()
 {
-    if (m_curMemento > m_listMemento.size() - 1 || m_curMemento < -1)
+    if (m_curMemento + 1 > m_listMemento.size() - 1 || m_curMemento + 1 < 0)
     {
         // Already the last one.
         return NULL;
     }
     list<Memento *>::iterator itr = m_listMemento.begin();
-    std::advance(itr, ++m_curMemento);
+    m_curMemento++;
+    if (m_curMemento > 0)
+    {
+        std::advance(itr, ++m_curMemento);
+    }
     return *itr;
 }

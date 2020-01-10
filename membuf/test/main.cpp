@@ -29,6 +29,10 @@ void TestReplaceOfLongBuf()
     long_buf.undo();
     string undo_str = long_buf.get_content();
     assert(in_str.compare(undo_str) == 0);
+    
+    long_buf.redo();
+    string redo_str = long_buf.get_content();
+    assert(rep_str.compare(redo_str) == 0);
 }
 
 
