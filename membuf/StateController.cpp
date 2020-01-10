@@ -71,7 +71,7 @@ Memento *StateController::getNext()
     m_curMemento++;
     if (m_curMemento > 0)
     {
-        std::advance(itr, ++m_curMemento);
+        std::advance(itr, m_curMemento);
     }
     return *itr;
 }

@@ -55,6 +55,12 @@ void TestUndoRedo()
     string ret = mbuf.get_content();
     assert(ret.compare(str1) == 0);
     
+    printf("\tundo (histor 0/0) ...\n");
+    mbuf.undo();
+    ret = mbuf.get_content();
+    // Nothing to undo. Must be the same as before
+    assert(ret.compare(str1) == 0);
+    
     printf("\tappend (history 1/1) ...\n");
     mbuf.append(str2 + str3 + str4 + str6);
     ret = mbuf.get_content();
@@ -91,6 +97,22 @@ void TestUndoRedo()
     printf("\tappend (history 3/3) ...\n");
     mbuf.append(str6);
     ret = mbuf.get_content();
+    assert(ret.compare(str1 + str2 + str3 + str4 + str6) == 0);
+    
+    printf("\tundo 3 times (history 0/3) ...\n");
+    mbuf.undo().undo().undo();
+    ret = mbuf.get_content();
+    assert(ret.compare(str1) == 0);
+    
+    printf("\tredo 3 times (history 3/3) ...\n");
+    //mbuf.redo().redo().redo();
+    mbuf.redo();
+    ret = mbuf.get_content();
+    mbuf.redo();
+    ret = mbuf.get_content();
+    mbuf.redo();
+    ret = mbuf.get_content();
+
     assert(ret.compare(str1 + str2 + str3 + str4 + str6) == 0);
     
     printf("\tundo wrong append (history 2/3)...\n");
@@ -268,5 +290,19 @@ void TestReplace()
     rep_str = regex_replace(rep_str, regex(" to "), " not_such_word ");
     assert(replaced.compare(rep_str) == 0);
     
+    printf("\tSpecial case that to_string already in original ...\n");
+    string init_str("apple orange apple orange orange apple apple orange");
+    membuf special(init_str);
+    
+    printf("\treplace ...\n");
+    special.replace("apple", "orange");
+    string ret = special.get_content();
+    assert(ret.compare("orange orange orange orange orange orange orange orange") == 0);
+    
+    printf("\tundo ...\n");
+    special.undo();
+    ret = special.get_content();
+    assert(ret.compare(init_str) == 0);
+
     printf("Tested replace.\n");
 }

@@ -1,12 +1,24 @@
 all: test_cov
 
-CFLAGS = -fprofile-arcs -ftest-coverage
+CFLAGS = -fprofile-arcs -ftest-coverage -std=c++11
 
 membuf.o: ../membuf.cpp
 	g++ $(CFLAGS) -o membuf.o -c ../membuf.cpp
 
-membuf.a: membuf.o
-	ar rcs membuf.a membuf.o
+BufferCommands.o: ../BufferCommands.cpp
+	g++ $(CFLAGS) -o BufferCommands.o -c ../BufferCommands.cpp
+
+CommandCommon.o: ../CommandCommon.cpp
+	g++ $(CFLAGS) -o CommandCommon.o -c ../CommandCommon.cpp
+
+StateController.o: ../StateController.cpp
+	g++ $(CFLAGS) -o StateController.o -c ../StateController.cpp
+
+Memento.o: ../Memento.cpp
+	g++ $(CFLAGS) -o Memento.o -c ../Memento.cpp
+
+membuf.a: membuf.o CommandCommon.o StateController.o BufferCommands.o Memento.o
+	ar rcs membuf.a membuf.o CommandCommon.o StateController.o BufferCommands.o Memento.o
 
 main.o: main.cpp
 	g++ -o main.o -I ../ -c main.cpp
@@ -15,4 +27,4 @@ test_cov: membuf.a main.o
 	g++ --coverage -o test main.o membuf.a
 
 clean:
-	rm -f main.o membuf.o membuf.a *.gcov *.gcno *.gcda test
+	rm -f main.o membuf.o membuf.a *.gcov *.gcno *.gcda test *.o

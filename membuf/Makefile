@@ -4,6 +4,7 @@ all: membuf.a
 
 membuf.o: membuf.cpp
 	g++ $(CFLAGS) -o membuf.o -c membuf.cpp
+
 BufferCommands.o: BufferCommands.cpp
 	g++ $(CFLAGS) -o BufferCommands.o -c BufferCommands.cpp
 
