@@ -9,8 +9,28 @@
 #include <iostream>
 #include "membuf.hpp"
 #include <assert.h>
+#include <regex>
 
 using namespace std;
+
+void TestReplaceOfLongBuf()
+{
+    
+    // Test replace with longer text
+    string in_str = "This is a program in C++ to test design pattern memento. The idea is to use memento to store states. Memento is a middle man in this approach. The design pattern contains a memento, a caretaker, and a originator.";
+    membuf long_buf(in_str);
+    
+    // Test special case when from_str is a substring of to_str
+    long_buf.replace("te", "test");
+    string replaced = long_buf.get_content();
+    string rep_str = regex_replace(in_str, regex("te"), "test");
+    assert(replaced.compare(rep_str) == 0);
+    
+    long_buf.undo();
+    string undo_str = long_buf.get_content();
+    assert(in_str.compare(undo_str) == 0);
+}
+
 
 int main(int argc, const char * argv[]) {
     // insert code here...
@@ -44,5 +64,8 @@ int main(int argc, const char * argv[]) {
     text_buf.replace("hello", "hello");
     
     assert(read_content.compare("hello hello world!") == 0);
+    
+    TestReplaceOfLongBuf();
+    
     return 0;
 }

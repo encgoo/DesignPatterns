@@ -109,24 +109,48 @@ membuf& membuf::erase_trailing(size_t len)
 
 membuf& membuf::replace(const std::string &from_str, const std::string &to_str)
 {
-    // There is no easy way to revert this operation. Store the whole m_buf
-    // as a string in Memento
-    string content_to_store;
-    copy(m_buf.begin(), m_buf.end(), back_inserter(content_to_store));
+    // This is the tough one in this file. Need to store enough
+    // information to do undo.
+    //
+    // The difficulty here is to handle something like this. Imagine:
+    // Original string: "I think apple is better than orange"
+    // Now replace "apple" with "orange". The end string becomes
+    // "I think orange is better than orange".
+    // To undo, we need to tell which "orange" was in the original string, and which
+    // one came from the replace.
+    //
+    // The approach here is to count all the to_string in the original string, and
+    // store the location in skipList. Later on, when undo, keep those unchanged.
+    //
     
-    Memento *pMemento = new Memento(content_to_store, from_str, to_str);
-    m_stateController.storeMemento(pMemento);
+    // There is a special case. If the from_str is a substring of the to_str,
+    // then we don't need to bother.
+    bool is_substring = search(to_str.begin(), to_str.end(),
+                               from_str.begin(), from_str.end()) != to_str.end();
     
-    vector<unsigned char>::iterator find_itr = search(m_buf.begin(), m_buf.end(),
-                                                      from_str.begin(), from_str.end());
-    
-    while (find_itr != m_buf.end())
+    vector<int> skipList;
+    vector<unsigned char>::iterator search_start = m_buf.begin();
+    vector<unsigned char>::iterator search_end = m_buf.end();
+    vector<unsigned char>::iterator next_from = search(search_start, search_end, from_str.begin(), from_str.end());
+    int cur_index = 0;
+    while (next_from != m_buf.end())
     {
-        copy(to_str.begin(), to_str.end(), find_itr);
-        vector<unsigned char>::iterator start_ptr = find_itr;
-        advance(start_ptr, 1);
-        find_itr = search(start_ptr, m_buf.end(), from_str.begin(), from_str.end());
+        int count = 0;
+        if (!is_substring)
+        {
+            count = count_toString(search_start, next_from, to_str, cur_index, skipList);
+        }
+        cur_index += count;
+        // first erase and then insert?
+        m_buf.erase(next_from, next_from + from_str.size());
+        m_buf.insert(next_from, to_str.begin(), to_str.end());
+        cur_index ++;
+        search_start = next_from + to_str.size();
+        next_from = search(search_start, m_buf.end(), from_str.begin(), from_str.end());
     }
+    
+    Memento *pMemento = new Memento(from_str, to_str, skipList);
+    m_stateController.storeMemento(pMemento);
     
     return *this;
 }
@@ -135,4 +159,84 @@ string membuf::get_content() const
 {
     string ret(m_buf.begin(), m_buf.end());
     return ret;
+}
+
+int membuf::count_toString(vector<unsigned char>::iterator search_start,
+                           vector<unsigned char>::iterator search_end,
+                           string str_to,
+                           int cur_index,
+                           vector<int>& skipList)
+{
+    int count = 0;
+    vector<unsigned char>::iterator itr =
+    search(search_start, search_end, str_to.begin(), str_to.end());
+    while (itr != search_end)
+    {
+        skipList.push_back(cur_index + count);
+        count ++;
+        itr = search(itr + str_to.size(), search_end, str_to.begin(), str_to.end());
+    }
+    return count;
+}
+
+void membuf::undo_replace(const string& from_str, const string& to_str,
+                          std::vector<int> skipList)
+{
+    int cur_index = 0;
+    vector<unsigned char>::iterator search_start = m_buf.begin();
+    vector<unsigned char>::iterator search_end = m_buf.end();
+    
+    vector<unsigned char>::iterator itr = search(search_start, search_end,
+                                                 to_str.begin(), to_str.end());
+    while (itr != m_buf.end())
+    {
+        // is cur_index in replace_lst?
+        bool b_inlist = find(skipList.begin(), skipList.end(),
+                             cur_index) != skipList.end();
+        if (!b_inlist)
+        {
+            m_buf.erase(itr, itr + to_str.size());
+            m_buf.insert(itr, from_str.begin(), from_str.end());
+            search_start = itr + from_str.size();
+        }
+        else
+        {
+            search_start = itr + to_str.size();
+        }
+        cur_index ++;
+        itr = search(search_start, m_buf.end(),
+                     to_str.begin(), to_str.end());
+    }
+}
+
+membuf& membuf::undo()
+{
+    Memento* prev = m_stateController.getPrevious();
+    if (prev != NULL){
+        
+        switch(prev->m_op)
+        {
+            case REPLACE:
+                undo_replace(prev->m_str1, prev->m_str2, prev->m_skipList);
+                
+        }
+        
+        
+    }
+    
+    return *this;
+}
+
+membuf& membuf::redo()
+{
+    Memento* next = m_stateController.getNext();
+    if (next != NULL)
+    {
+        switch(next->m_op)
+        {
+            case REPLACE:
+                replace(next->m_str1, next->m_str2);
+        }
+    }
+    return *this;
 }

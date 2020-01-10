@@ -47,20 +47,20 @@ void StateController::storeMemento(Memento *pMemento)
 
 Memento *StateController::getPrevious()
 {
-    if (m_curMemento <= 0)
+    if (m_curMemento < 0)
     {
         // Already the first one or the list is empty
         return NULL;
     }
     
     list<Memento *>::iterator itr = m_listMemento.begin();
-    std::advance(itr, --m_curMemento);
+    std::advance(itr, m_curMemento--);
     return *itr;
 }
 
 Memento *StateController::getNext()
 {
-    if (m_curMemento >= m_listMemento.size() - 1)
+    if (m_curMemento > m_listMemento.size() - 1 || m_curMemento < -1)
     {
         // Already the last one.
         return NULL;

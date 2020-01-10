@@ -59,7 +59,16 @@ public:
     // Save to TXT file
     size_t save_file(const std::string& filename) const;
     
+    // Utility functions
     // Get content
     std::string get_content() const;
+    
+    int count_toString(std::vector<unsigned char>::iterator search_start,
+                       std::vector<unsigned char>::iterator search_end,
+                       std::string str_to,
+                       int cur_index,
+                       std::vector<int>& skipList);
+    void undo_replace(const std::string& from_str, const std::string& to_str,
+                      std::vector<int> skipList);
 };
 #endif /* membuf_hpp */
