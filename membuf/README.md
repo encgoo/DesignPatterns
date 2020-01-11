@@ -4,7 +4,7 @@ This is a C++ program that emulates buffer management found within many text edi
 It is an example of using design patterns Memento and Command. 
 
 ## 1. Requirements
-##### 1.1 A text buffer to store text.
+##### 1.1 A text buffer to store text. [design](#constructor)
 ##### 1.2 User can initialize the text buffer with some text
 ##### 1.3 User can insert a substring at a position
 ##### 1.4 User can append a substring to the existing text
@@ -38,8 +38,8 @@ to the corresponding concrete command objects.
 
 Methods of this class:
 
-##### Constructor
-Its constructor implements Requirement 1.2. It has a StrateController (the CareTaker of
+##### Constructor <a id="constructor"></a>
+Its constructor implements Requirement 1.2. It has a StateController (the CareTaker of
 the Memento Design Pattern).
 
 ##### insert
