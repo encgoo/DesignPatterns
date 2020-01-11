@@ -163,14 +163,18 @@ Pseudo code for the Execute method of the ReplaceCommand
     
 
 ## 3. Make
-### Build
-A Makefile was provided for building a static lib using g++. From a command line window:
+This project can be built using xCode or g++.
+
+This has been tested on MacOS (10.15.2) with xCode (10.1), and CentOS 9 (g++ 8.2.1). 
+### Use xCode 
+On Mac, use the membuf.xcodeproj to build.
+
+### Use Makefile
+A Makefile is provided for building a static lib using g++. From a command line window:
 
 ```make```
 
 Check membuf.a is there.
-
-This has been tested on MacOS (10.15.2), and CentOS 9 (g++ 8.2.1). 
 
 ## 4. Usage
 Link the static lib into your application. 
@@ -190,7 +194,7 @@ It has seven functions:
 
 These tests can all be linked back to the requirements.
 
-### test only
+### Test Only
 Do this:
 
 ```
@@ -199,7 +203,7 @@ make
 ```
 If there is no assertion failure, all tests are passed.
 
-### test with code coverage
+### Test with Code Coverage
 Here gcov is used to collect code coverage data.
 
 Do this:
