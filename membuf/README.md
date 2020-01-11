@@ -154,8 +154,13 @@ For this example, for the 4 "orange" substrings in the final string, the second 
 were in the original string. So a list storing [1,3] is sufficient to store the information for the Undo
 method.
 
-Therefore, the Execute method of the ReplaceCommand shall generate this list when it is replacing.
-
+Pseudo code for the Execute method of the ReplaceCommand
+* Start from the first word of the original string.
+    1. look for the next occurrence of the from_str
+    2. count all the to_str before the first from_str
+    3. replace the from_str with to_str
+    4. repeat i. above until the end of the original string
+    
 
 ## 3. Make
 ### Build
