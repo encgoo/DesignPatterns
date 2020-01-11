@@ -1,6 +1,7 @@
 # Buffer Management
 
-Emulate buffer management found within many text editor
+This is a C++ program that emulates buffer management found within many text editor.
+It is an example of using design patterns Memento and Command. 
 
 ## 1. Requirements
 ##### 1.1 A text buffer to store text.
@@ -120,6 +121,37 @@ It contains the following 5 concrete commands:
 * EraseTrailingCommand
 * ReplaceCommand
 
+Each concrete command needs to implement the Execute and Undo methods.
+The implementations of the first 4 concrete commands are pretty straightforward.
+
+The most difficult one is the ReplaceCommand. More specifically, the Undo method
+is the tough part. 
+
+The following example is a special case that needs attention. Assume that
+the original string is 
+
+
+```
+"apple orange apple orange". 
+```
+Now replace "apple" with "orange".
+The Execute method is straightforward. It shall result in 
+```
+"orange orange orange orange". 
+```
+Then to undo, we can't just
+replace all the "orange" back with "apple".
+
+The problem here is that the original string can contain both the from_str("apple" here) and the to_str ("orange" here) 
+before replacing from_str to to_str. 
+
+The solution implemented here is to use a list of integer to store the index of the to_str in the
+resulted string. For this example, for the 4 "orange" substrings, the second one and the last one 
+were in the original string. So a list storing [2,4] is sufficient to store the information for the Undo
+method.
+
+Therefore, the Execute method of the ReplaceCommand shall generate this list when it is replacing.
+
 
 ## 3. Make
 ### Build
@@ -129,7 +161,7 @@ A Makefile was provided for building a static lib using g++. From a command line
 
 Check membuf.a is there.
 
-This has been tested on MacOS (10.15.2, and CentOS 9 (g++ 8.2.1). 
+This has been tested on MacOS (10.15.2), and CentOS 9 (g++ 8.2.1). 
 
 ## 4. Usage
 Link the static lib into your application. 
