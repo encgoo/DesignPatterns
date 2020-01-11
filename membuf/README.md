@@ -1,9 +1,10 @@
 # Buffer Management
 
-This is a C++ program that emulates buffer management found within many text editor.
+This is a C++ program that emulates buffer management found within many text editors.
 It is an example of using design patterns Memento and Command. 
 
 ## 1. Requirements
+These are the requirements for this program. Each requirement contains a link to the corresponding design and test.
 ##### 1.1 A text buffer to store text. 
 ##### 1.2 User can initialize the text buffer with some text.  [design](#constructor)/[test](#testundoredo)
 ##### 1.3 User can insert a substring at a position [design](#insert)/[test](#testinsert)
@@ -25,8 +26,8 @@ Design patterns are used in the implementation.
 This design decision comes from Requirement 1.8 and 1.9. Memento can be used to manage states and history of operations.
 
 #### 2.1.2 Command
-This design decision can be linked to Requirement 1.12. Instead of storing the whole buffer before modification, we store the
-command (operation) together with some necessary information for undo.
+This design decision can be linked to Requirement 1.12. Instead of storing the whole buffer before the modification, we store the
+command (operation), together with some necessary information for undo purpose.
 
 ### 2.2 Implementation
 #### 2.2.1 UML diagrams
@@ -106,12 +107,12 @@ to a Command.
 
 #### 2.2.5 Command <a id="command"></a>
 This [class](Command.hpp) is the base class for the Command design pattern. It contains
-two abstract method: Execute, and Undo.
+two abstract methods: Execute, and Undo.
 
 #### 2.2.6 CommandCommon
 This [class](CommandCommon.hpp) is a subclass of the Command class above. It is created for 
 factorization. Note that the undo of insert is erase. So concrete
-commands share common operations. 
+commands share common operations. It makes sense to factorize common code here.
 
 #### 2.2.7 BufferCommands
 This [file](BufferCommands.hpp) contains the following 5 concrete commands:
@@ -138,14 +139,15 @@ The Execute method is straightforward. It shall result in
 ```
 "orange orange orange orange". 
 ```
-Then to undo, we can't just
+Then to undo, we can't simply
 replace all the "orange" back with "apple".
 
 The problem here is that the original string can contain both the from_str("apple" here) and the to_str ("orange" here) 
-before replacing from_str to to_str. 
+before replacing from_str with to_str. After replacing, all become the to_str("orange" here). To undo, we need
+to know which to_str shall be changed back to from_str.
 
-The solution implemented here is to use a list of integer to store the index of the to_str in the
-resulted string. For this example, for the 4 "orange" substrings, the second one and the last one 
+The solution implemented here is to use a list of integers to store the indices of the to_str in the
+resulted string. For this example, for the 4 "orange" substrings in the final string, the second one and the last one 
 were in the original string. So a list storing [2,4] is sufficient to store the information for the Undo
 method.
 
@@ -174,6 +176,7 @@ It has seven functions:
 * TestAppend <a id="testappend"></a>
 * TestErase <a id="testerase"></a>
 * TestEraseTrailing <a id="testerasetrailing"></a>
+* TestReplace <a id="replace"></a>
 * TestSaveRead <a id="testsaveread"></a>
 * TestUndoRedo <a id="testundoredo"></a>
 
@@ -186,7 +189,7 @@ Do this:
 make
 ./test
 ```
-If no assertion failure, all tests are passed.
+If there is no assertion failure, all tests are passed.
 
 ### test with code coverage
 Here gcov is used to collect code coverage data.
@@ -205,4 +208,4 @@ is used as an example.
 gcov Memento.cpp
 more Memento.cpp.gcov
 ```
-The unit tests in main.cpp give 100% code coverage (line coverage).
+The unit tests provided in main.cpp give 100% code coverage (line coverage).
