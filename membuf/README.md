@@ -33,7 +33,7 @@ command (operation) together with some necessary information for undo.
 ![UML_Class](images/uml_class.png)
 
 #### 2.2.2 membuf
-This is the main class that provides all the services. It delegates 5 of the services
+This [class](membuf.hpp) is the main class that provides all the services. It delegates 5 of the services
 to the corresponding concrete command objects.
 
 Methods of this class:
@@ -79,7 +79,7 @@ This method implements Requirement 1.10.
 This method implements Requirement 1.11.
 
 #### 2.2.3 StateController
-This is the CareTaker of the Memento design pattern. It maintains a list of Mementos.
+This [class](StateController.hpp) is the CareTaker of the Memento design pattern. It maintains a list of Mementos.
 It also maintains a pointer to the current Memento. 
 
 It includes these methods.
@@ -101,20 +101,20 @@ Return the next Memento if there is one. Update the current pointer.
 If there not next, return NULL.
 
 #### 2.2.4 Memento
-This is the Memento class of the Memento design pattern. It contains a pointer
+This [class](Memento.hpp) is the Memento class of the Memento design pattern. It contains a pointer
 to a Command.
 
 #### 2.2.5 Command <a id="command"></a>
-This is the base class for the Command design pattern. It contains
+This [class](Command.hpp) is the base class for the Command design pattern. It contains
 two abstract method: Execute, and Undo.
 
 #### 2.2.6 CommandCommon
-This is a subclass of the Command class above. It is created for 
+This [class](CommandCommon.hpp) is a subclass of the Command class above. It is created for 
 factorization. Note that the undo of insert is erase. So concrete
 commands share common operations. 
 
 #### 2.2.7 BufferCommands
-It contains the following 5 concrete commands:
+This [file](BufferCommands.hpp) contains the following 5 concrete commands:
 * InsertCommand
 * AppendCommand
 * EraseCommand
@@ -129,7 +129,6 @@ is the tough part.
 
 The following example is a special case that needs attention. Assume that
 the original string is 
-
 
 ```
 "apple orange apple orange". 
