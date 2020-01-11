@@ -8,8 +8,9 @@
 
 #include "BufferCommands.hpp"
 #include "membuf.hpp"
-using namespace std;
+#include <algorithm>
 
+using namespace std;
 
 /*
  InsertCommand
