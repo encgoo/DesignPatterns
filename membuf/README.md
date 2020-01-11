@@ -146,9 +146,12 @@ The problem here is that the original string can contain both the from_str("appl
 before replacing from_str with to_str. After replacing, all become the to_str("orange" here). To undo, we need
 to know which to_str shall be changed back to from_str.
 
-The solution implemented here is to use a list of integers to store the indices of the to_str in the
-resulted string. For this example, for the 4 "orange" substrings in the final string, the second one and the last one 
-were in the original string. So a list storing [2,4] is sufficient to store the information for the Undo
+The solution implemented here is to use a list of integers ```m_skipList``` to store the indices of the to_str in the
+resulted string. As shown in the following image, we use ```cur_index``` to track the position of _either_ the from_str 
+or the to_str in the _original_ string. Then the value of ```cur_index``` is pushed to ```m_skipList``` when it is a to_str. 
+![store_toString](images/store_toString.png)
+For this example, for the 4 "orange" substrings in the final string, the second one and the last one 
+were in the original string. So a list storing [1,3] is sufficient to store the information for the Undo
 method.
 
 Therefore, the Execute method of the ReplaceCommand shall generate this list when it is replacing.
