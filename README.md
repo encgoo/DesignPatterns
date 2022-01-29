@@ -1,4 +1,4 @@
 # DesignPatterns
 
 ## Mememto and Command
-Refere to [membuf](membuf/README.md).
+Refer to [membuf](membuf/README.md).
